@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./jobCard.module.css";
 import {
   Card,
@@ -73,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
 
 const JobCard = ({ job }) => {
   const classes = useStyles();
-  const [expand, setExpand] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -92,7 +91,7 @@ const JobCard = ({ job }) => {
           aria-labelledby="modal-title"
           aria-describedby="modal-description"
         >
-          <div className={classes.paper}>{job?.description}</div>
+          <div className={classes.paper}>{job?.jobDetailsFromCompany}</div>
         </Modal>
         <div className={styles.postedNumDays}>
           <img width={"11px"} height={"11px"} src={hourglass} alt="" />
@@ -102,15 +101,15 @@ const JobCard = ({ job }) => {
           <CardMedia
             component="img"
             alt="Job Image"
-            image={job?.image}
+            image={job?.logoUrl}
             className={classes.customCardMedia}
           />
           <div>
             <Typography className={classes.compDiv} variant="body1">
-              {job?.company}
+              {job?.companyName}
             </Typography>
             <Typography className={classes.titleDiv} variant="h5">
-              {job?.title}
+              {job?.jobRole}
             </Typography>
             <Typography className={classes.locDiv} variant="body2">
               {job?.location}
@@ -119,7 +118,13 @@ const JobCard = ({ job }) => {
         </div>
         <div className={styles.salaryDiv}>
           <p>Estimated Salary:</p>
-          <p>₹20 - 25 LPA</p>
+          <p>
+            {job?.minJdSalary +
+              " - " +
+              job?.maxJdSalary +
+              " " +
+              job?.salaryCurrencyCode}
+          </p>
           <p>
             <img width={"14px"} height={"14px"} src={check} alt="" />
           </p>
@@ -127,37 +132,21 @@ const JobCard = ({ job }) => {
         <div className={styles.abtCmpDiv}>About Company:</div>
         <div className={styles.abtUsDiv}>About Us</div>
         <Typography className={styles.descDiv} variant="body2">
-          <div
-            className={
-              // expand == true ? styles.descInnerDiv :
-              styles.descInnerDivTinted
-            }
-          >
-            {job?.description}{" "}
-            {/* {expand == true && (
-              <div
-                style={{ color: "#4943da", cursor: "pointer" }}
-                onClick={() => setExpand(false)}
-              >
-                see less
-              </div>
-            )} */}
+          <div className={styles.descInnerDivTinted}>
+            {job?.jobDetailsFromCompany}{" "}
           </div>
-          {/* {expand == false && ( */}
           <div
             className={styles.viewJobDiv}
             onClick={() => {
-              // setExpand(true);
               handleOpenModal();
             }}
           >
             View job
           </div>
-          {/* )} */}
         </Typography>
         <div className={styles.minExpTextDiv}>Minimum Experience</div>
         <Typography className={styles.expDiv} variant="body2">
-          {job?.experience}
+          {job?.minExp == 1 ? job?.minExp + " year" : job?.minExp + " years"}
         </Typography>
         <button className={styles.btnDiv}>
           <img width={"20px"} height={"20px"} src={thunder} alt="" />
