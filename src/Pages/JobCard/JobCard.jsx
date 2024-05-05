@@ -148,10 +148,13 @@ const JobCard = ({ job }) => {
         <Typography className={styles.expDiv} variant="body2">
           {job?.minExp == 1 ? job?.minExp + " year" : job?.minExp + " years"}
         </Typography>
-        <button className={styles.btnDiv}>
-          <img width={"20px"} height={"20px"} src={thunder} alt="" />
-          <p>Easy Apply</p>
-        </button>
+        <a style={{ textDecoration: "none" }} href={job?.jdLink}>
+          <button className={styles.btnDiv}>
+            <img width={"20px"} height={"20px"} src={thunder} alt="" />
+            <p>Easy Apply</p>
+          </button>
+        </a>
+
         <div className={styles.belowBtnDiv}>
           <div className={classes.blurredImage}>
             <img className={classes.image} src="" alt="Blurred" />
