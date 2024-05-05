@@ -55,7 +55,6 @@ const Filters = ({
 }) => {
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState("");
-
   const handleSearch = () => {};
 
   const [roleName, setRoleName] = useState([]);
@@ -135,13 +134,13 @@ const Filters = ({
               )}
               MenuProps={MenuProps}
             >
-              {names.map((name) => (
+              {jobRolesList?.map((name) => (
                 <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, roleName, theme)}
+                  key={name?.jobRole}
+                  value={name?.jobRole}
+                  style={getStyles(name?.jobRole, minExp, theme)}
                 >
-                  {name}
+                  {name?.jobRole}
                 </MenuItem>
               ))}
             </Select>
@@ -176,13 +175,13 @@ const Filters = ({
               )}
               MenuProps={MenuProps}
             >
-              {names.map((name) => (
+              {minExpList?.map((name) => (
                 <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, minExp, theme)}
+                  key={name?.minExp}
+                  value={name?.minExp}
+                  style={getStyles(name?.minExp, minExp, theme)}
                 >
-                  {name}
+                  {name?.minExp}
                 </MenuItem>
               ))}
             </Select>
@@ -215,13 +214,13 @@ const Filters = ({
               )}
               MenuProps={MenuProps}
             >
-              {names.map((name) => (
+              {typeOfWorkList?.map((name) => (
                 <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, typeOfWork, theme)}
+                  key={name?.location}
+                  value={name?.location}
+                  style={getStyles(name?.location, typeOfWork, theme)}
                 >
-                  {name}
+                  {name?.location}
                 </MenuItem>
               ))}
             </Select>
@@ -256,15 +255,17 @@ const Filters = ({
               )}
               MenuProps={MenuProps}
             >
-              {names.map((name) => (
-                <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, minBasePay, theme)}
-                >
-                  {name}
-                </MenuItem>
-              ))}
+              {minBasePayList?.map((name) => {
+                return (
+                  <MenuItem
+                    key={name?.jdUid}
+                    value={name?.minJdSalary}
+                    style={getStyles(name?.minJdSalary, minBasePay, theme)}
+                  >
+                    {name?.minJdSalary}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
         </div>

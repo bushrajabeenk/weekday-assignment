@@ -8,6 +8,7 @@ import { getAllJobs } from "../Redux/jobCardSlice";
 const HomePage = () => {
   const dispatch = useDispatch();
   const { jobsData } = useSelector((state) => state.jobCardSlice);
+
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [typeOfWorkList, setTypeOfWorkList] = useState([]);
@@ -29,35 +30,45 @@ const HomePage = () => {
   }, [dispatch, page]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, [jobsData]);
-
-  useState(() => {
-    const newtypeOfWorkList = jobsData.map(({ location, jdUid }) => ({
-      location,
-      jdUid,
-    }));
-    setTypeOfWorkList(newtypeOfWorkList);
-
-    const newMinExpList = jobsData.map(({ minExp, jdUid }) => ({
-      minExp,
-      jdUid,
-    }));
-    setMinExpList(newMinExpList);
-
-    const newJobRolesList = jobsData.map(({ jobRole, jdUid }) => ({
-      jobRole,
-      jdUid,
-    }));
-    setJobRolesList(newJobRolesList);
-
-    const newMinBasePayList = jobsData.map(({ minJdSalary, jdUid }) => ({
-      minJdSalary,
-      jdUid,
-    }));
-    setMinBasePayList(newMinBasePayList);
+    setLoading(false);
+    if (jobsData && jobsData.length > 0) {
+      const newtypeOfWorkList =
+        jobsData &&
+        jobsData?.map(({ location, jdUid }) => ({
+          location,
+          jdUid,
+        }));
+      if (newtypeOfWorkList) {
+        setTypeOfWorkList(newtypeOfWorkList);
+      }
+      const newMinExpList =
+        jobsData &&
+        jobsData?.map(({ minExp, jdUid }) => ({
+          minExp,
+          jdUid,
+        }));
+      if (newMinExpList) {
+        setMinExpList(newMinExpList);
+      }
+      const newJobRolesList =
+        jobsData &&
+        jobsData?.map(({ jobRole, jdUid }) => ({
+          jobRole,
+          jdUid,
+        }));
+      if (newJobRolesList) {
+        setJobRolesList(newJobRolesList);
+      }
+      const newMinBasePayList =
+        jobsData &&
+        jobsData?.map(({ minJdSalary, jdUid }) => ({
+          minJdSalary,
+          jdUid,
+        }));
+      if (newMinBasePayList) {
+        setMinBasePayList(newMinBasePayList);
+      }
+    }
   }, [jobsData]);
 
   return (
