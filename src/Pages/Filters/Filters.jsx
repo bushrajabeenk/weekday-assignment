@@ -43,9 +43,20 @@ function getStyles(name, roleName, theme) {
   };
 }
 
-const Filters = () => {
+const Filters = ({
+  typeOfWorkList,
+  setTypeOfWorkList,
+  minExpList,
+  setMinExpList,
+  jobRolesList,
+  setJobRolesList,
+  minBasePayList,
+  setMinBasePayList,
+}) => {
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = () => {};
 
   const [roleName, setRoleName] = useState([]);
   const handleChangeRole = (event) => {
