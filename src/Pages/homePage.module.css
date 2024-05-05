@@ -1,0 +1,11 @@
+.homePageMainDiv {
+  margin: 50px 150px 50px;
+}
+
+.jobsContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 650px);
+  gap: 70px;
+}

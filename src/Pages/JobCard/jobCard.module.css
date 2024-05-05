@@ -1,0 +1,114 @@
+.mainDiv:hover {
+  
+}
+
+.postedNumDays {
+  display: flex;
+  gap: 2px;
+  border-radius: 30px;
+  width: 120px;
+  height: 20px;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 23px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  letter-spacing: 0.5px;
+}
+
+.salaryDiv {
+  display: flex;
+  gap: 5px;
+  color: rgb(80, 79, 79);
+  font-size: 15px;
+}
+
+.minExpTextDiv {
+  color: rgb(154, 153, 153);
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.abtCmpDiv {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding-bottom: 2px;
+}
+
+.abtUsDiv {
+  font-weight: 500;
+  font-size: 16px;
+  padding-bottom: 2px;
+}
+
+.descDiv {
+  padding-bottom: 30px;
+}
+
+.descInnerDiv {
+  font-size: 14px;
+  overflow-y: auto;
+  height: 200px;
+}
+
+.descInnerDiv::-webkit-scrollbar {
+  display: none;
+}
+
+.descInnerDivTinted {
+  font-size: 14px;
+  overflow-y: auto;
+  height: 200px;
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 95%);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 95%);
+}
+
+.descInnerDivTinted::-webkit-scrollbar {
+  display: none;
+}
+
+.expDiv {
+  padding: 7px 0px 15px;
+}
+
+.viewJobDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4943da;
+  cursor: pointer;
+}
+
+.btnDiv {
+  background: #52efc3;
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.belowBtnDiv {
+  margin-top: 10px;
+  background: #4943da;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  color: white;
+}
+
+.belowBtnDiv > p {
+  margin-left: 5px;
+}
