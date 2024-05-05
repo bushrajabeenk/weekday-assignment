@@ -6,8 +6,8 @@ export const getAllJobs = createAsyncThunk(
   async (args, { rejectWithValue }) => {
     try {
       const body = JSON.stringify({
-        limit: 10,
-        offset: 0,
+        limit: 15,
+        offset: (args - 1) * 10,
       });
       const response = await axios.post(
         "https://api.weekday.technology/adhoc/getSampleJdJSON",
@@ -50,7 +50,7 @@ export const jobCardSlice = createSlice({
         state.error = true;
       })
       .addCase(getAllJobs.rejected, (state, action) => {
-        state.loading = false;
+        state.loading = true;
         state.error = true;
       });
   },

@@ -1,0 +1,12 @@
+.filterMainDiv {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 50px;
+}
+
+.roles {
+}
+
+.searchCompany {
+  height: 30px;
+}
