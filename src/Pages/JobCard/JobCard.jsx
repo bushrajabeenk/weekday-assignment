@@ -124,7 +124,7 @@ const JobCard = ({ job, roleName, typeOfWork, minExp, minBasePay }) => {
             )}
           </div>
         </div>
-        {job?.minJdSalary !== null && job?.maxJdSalary !== null && (
+        {job?.minJdSalary !== null && job?.maxJdSalary !== null ? (
           <div className={styles.salaryDiv}>
             <p>Estimated Salary:</p>
             <p>
@@ -138,6 +138,8 @@ const JobCard = ({ job, roleName, typeOfWork, minExp, minBasePay }) => {
               <img width={"14px"} height={"14px"} src={check} alt="" />
             </p>
           </div>
+        ) : (
+          <div style={{ padding: "25px" }}></div>
         )}
         {job?.jobDetailsFromCompany !== null && (
           <>
@@ -158,7 +160,7 @@ const JobCard = ({ job, roleName, typeOfWork, minExp, minBasePay }) => {
             </Typography>
           </>
         )}
-        {job?.minExp !== null && (
+        {job?.minExp !== null ? (
           <>
             <div className={styles.minExpTextDiv}>Minimum Experience</div>
             <Typography className={styles.expDiv} variant="body2">
@@ -167,6 +169,8 @@ const JobCard = ({ job, roleName, typeOfWork, minExp, minBasePay }) => {
                 : job?.minExp + " years"}
             </Typography>
           </>
+        ) : (
+          <div style={{ padding: "30px" }}></div>
         )}
         {job?.jdLink !== null && (
           <a style={{ textDecoration: "none" }} href={job?.jdLink}>
