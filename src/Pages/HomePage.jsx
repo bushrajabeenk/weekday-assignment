@@ -11,10 +11,20 @@ const HomePage = () => {
 
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const [typeOfWork, setTypeOfWork] = useState([]);
   const [typeOfWorkList, setTypeOfWorkList] = useState([]);
+
+  const [minExp, setMinExp] = useState([]);
   const [minExpList, setMinExpList] = useState([]);
+
   const [jobRolesList, setJobRolesList] = useState([]);
+  const [roleName, setRoleName] = useState([]);
+
+  const [minBasePay, setMinBasePay] = useState([]);
   const [minBasePayList, setMinBasePayList] = useState([]);
+
+  const [filteredData, setFilteredData] = useState([]);
 
   const handleScroll = () => {
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
@@ -38,42 +48,78 @@ const HomePage = () => {
           location,
           jdUid,
         }));
-      if (newtypeOfWorkList) {
-        setTypeOfWorkList(newtypeOfWorkList);
+      const uniqueData = newtypeOfWorkList.filter((value, index, self) => {
+        return (
+          self.findIndex((obj) => obj?.location === value?.location) === index
+        );
+      });
+      if (uniqueData) {
+        setTypeOfWorkList(uniqueData);
       }
+
       const newMinExpList =
         jobsData &&
         jobsData?.map(({ minExp, jdUid }) => ({
           minExp,
           jdUid,
         }));
-      if (newMinExpList) {
-        setMinExpList(newMinExpList);
+      const uniqueData2 = newMinExpList.filter((value, index, self) => {
+        return self.findIndex((obj) => obj?.minExp === value?.minExp) === index;
+      });
+      if (uniqueData2) {
+        setMinExpList(uniqueData2);
       }
+
       const newJobRolesList =
         jobsData &&
         jobsData?.map(({ jobRole, jdUid }) => ({
           jobRole,
           jdUid,
         }));
-      if (newJobRolesList) {
-        setJobRolesList(newJobRolesList);
+      const uniqueData3 = newJobRolesList.filter((value, index, self) => {
+        return (
+          self.findIndex((obj) => obj?.jobRole === value?.jobRole) === index
+        );
+      });
+      if (uniqueData3) {
+        setJobRolesList(uniqueData3);
       }
+
       const newMinBasePayList =
         jobsData &&
         jobsData?.map(({ minJdSalary, jdUid }) => ({
           minJdSalary,
           jdUid,
         }));
-      if (newMinBasePayList) {
-        setMinBasePayList(newMinBasePayList);
+      const uniqueData4 = newMinBasePayList.filter((value, index, self) => {
+        return (
+          self.findIndex((obj) => obj?.minJdSalary === value?.minJdSalary) ===
+          index
+        );
+      });
+      if (uniqueData4) {
+        setMinBasePayList(uniqueData4);
       }
     }
   }, [jobsData]);
 
+  useEffect(() => {
+    const filteredJobsData = jobsData?.filter((job) => {
+      return (
+        roleName?.includes(job?.jobRole?.toLowerCase()) &&
+        minBasePay?.includes(job?.minJdSalary) &&
+        minExp?.includes(job?.minExp) &&
+        typeOfWork?.includes(job?.location?.toLowerCase())
+      );
+    });
+
+    setFilteredData(filteredJobsData);
+  }, [roleName, minBasePay, minExp, typeOfWork, jobsData]);
+
   return (
     <div className={styles.homePageMainDiv}>
       <Filters
+        jobsData={jobsData}
         typeOfWorkList={typeOfWorkList}
         setTypeOfWorkList={setTypeOfWorkList}
         minExpList={minExpList}
@@ -82,11 +128,30 @@ const HomePage = () => {
         setJobRolesList={setJobRolesList}
         minBasePayList={minBasePayList}
         setMinBasePayList={setMinBasePayList}
+        minBasePay={minBasePay}
+        setMinBasePay={setMinBasePay}
+        typeOfWork={typeOfWork}
+        setTypeOfWork={setTypeOfWork}
+        minExp={minExp}
+        setMinExp={setMinExp}
+        roleName={roleName}
+        setRoleName={setRoleName}
       />
       <div className={styles.jobsContainer}>
-        {jobsData?.map((job) => (
-          <JobCard key={job?.jdUid} job={job} />
-        ))}
+        {(filteredData?.length > 0 ? filteredData : jobsData && jobsData)?.map(
+          (job) => {
+            return (
+              <JobCard
+                key={job?.jdUid}
+                job={job}
+                roleName={roleName}
+                typeOfWork={typeOfWork}
+                minExp={minExp}
+                minBasePay={minBasePay}
+              />
+            );
+          }
+        )}
         {loading && <p>Loading...</p>}
       </div>
     </div>

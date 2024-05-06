@@ -44,6 +44,7 @@ function getStyles(name, roleName, theme) {
 }
 
 const Filters = ({
+  jobsData,
   typeOfWorkList,
   setTypeOfWorkList,
   minExpList,
@@ -52,27 +53,39 @@ const Filters = ({
   setJobRolesList,
   minBasePayList,
   setMinBasePayList,
+  roleName,
+  setRoleName,
+  minBasePay,
+  setMinBasePay,
+  typeOfWork,
+  setTypeOfWork,
+  minExp,
+  setMinExp,
 }) => {
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState("");
   const handleSearch = () => {};
 
-  const [roleName, setRoleName] = useState([]);
   const handleChangeRole = (event) => {
-    setRoleName(event.target.value);
+    const {
+      target: { value },
+    } = event;
+    setRoleName(value);
   };
   const handleDeleteRole = (chipToDelete) => () => {
     setRoleName((prevroleName) => {
-      const updatedroleName = prevroleName.filter(
+      const updatedroleName = prevroleName?.filter(
         (name) => name !== chipToDelete
       );
       return updatedroleName;
     });
   };
 
-  const [minExp, setMinExp] = useState([]);
   const handleChangeMinExp = (event) => {
-    setMinExp(event.target.value);
+    const {
+      target: { value },
+    } = event;
+    setMinExp(value);
   };
   const handleDeleteMinExp = (chipToDelete) => () => {
     setMinExp((prevminExp) => {
@@ -81,9 +94,11 @@ const Filters = ({
     });
   };
 
-  const [typeOfWork, setTypeOfWork] = useState([]);
   const handleChangetypeOfWork = (event) => {
-    setTypeOfWork(event.target.value);
+    const {
+      target: { value },
+    } = event;
+    setTypeOfWork(value);
   };
   const handleDeletetypeOfWork = (chipToDelete) => () => {
     setTypeOfWork((prevtypeOfWork) => {
@@ -94,9 +109,11 @@ const Filters = ({
     });
   };
 
-  const [minBasePay, setMinBasePay] = useState([]);
   const handleChangeminBasePay = (event) => {
-    setMinBasePay(event.target.value);
+    const {
+      target: { value },
+    } = event;
+    setMinBasePay(value);
   };
   const handleDeleteMinBasePay = (chipToDelete) => () => {
     setMinBasePay((prevminBasePay) => {
@@ -122,14 +139,16 @@ const Filters = ({
               input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
               renderValue={(selected) => (
                 <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                  {selected.map((value) => (
-                    <Chip
-                      key={value}
-                      label={value}
-                      onDelete={handleDeleteRole(value)}
-                      deleteIcon={<CancelIcon />}
-                    />
-                  ))}
+                  {selected?.map((value) => {
+                    return (
+                      <Chip
+                        key={value}
+                        label={value}
+                        onDelete={handleDeleteRole(value?.name)}
+                        deleteIcon={<CancelIcon />}
+                      />
+                    );
+                  })}
                 </Box>
               )}
               MenuProps={MenuProps}
@@ -167,7 +186,7 @@ const Filters = ({
                     <Chip
                       key={value}
                       label={value}
-                      onDelete={handleDeleteMinExp(value)}
+                      onDelete={handleDeleteMinExp(value?.name)}
                       deleteIcon={<CancelIcon />}
                     />
                   ))}
@@ -206,7 +225,7 @@ const Filters = ({
                     <Chip
                       key={value}
                       label={value}
-                      onDelete={handleDeletetypeOfWork(value)}
+                      onDelete={handleDeletetypeOfWork(value?.name)}
                       deleteIcon={<CancelIcon />}
                     />
                   ))}
@@ -247,7 +266,7 @@ const Filters = ({
                     <Chip
                       key={value}
                       label={value}
-                      onDelete={handleDeleteMinBasePay(value)}
+                      onDelete={handleDeleteMinBasePay(value?.name)}
                       deleteIcon={<CancelIcon />}
                     />
                   ))}

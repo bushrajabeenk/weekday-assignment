@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, roleName, typeOfWork, minExp, minBasePay }) => {
   const classes = useStyles();
   const [openModal, setOpenModal] = useState(false);
   const handleOpenModal = () => {
