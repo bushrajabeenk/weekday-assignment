@@ -1,6 +1,6 @@
 Steps:
 1. Clone the repo
-git clone <repolink>
+git clone [repolink](https://github.com/bushrajabeenk/weekday-assignment.git)
 2. git install (if it does not work, then git install --force)
 3. git checkout main
 4. npm start (this will open the project locally on your PC on 3000 port number)
