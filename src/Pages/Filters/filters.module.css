@@ -1,12 +1,22 @@
 .filterMainDiv {
   display: flex;
+  align-items: center;
   gap: 10px;
   padding-bottom: 50px;
 }
 
-.roles {
+.searchCompany {
+  border: 1px solid grey;
+  border-radius: 4px;
 }
 
-.searchCompany {
-  height: 30px;
+.searchCompanyDiv {
+  height: 50px;
+  width: 300px;
+  padding: 0px 10px;
+  border-radius: 4px;
+}
+
+input {
+  border-style: none;
 }

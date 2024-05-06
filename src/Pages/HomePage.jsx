@@ -25,6 +25,8 @@ const HomePage = () => {
   const [minBasePayList, setMinBasePayList] = useState([]);
 
   const [filteredData, setFilteredData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchedResults, setSearchedResults] = useState([]);
 
   const handleScroll = () => {
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
@@ -112,7 +114,6 @@ const HomePage = () => {
         typeOfWork?.includes(job?.location?.toLowerCase())
       );
     });
-
     setFilteredData(filteredJobsData);
   }, [roleName, minBasePay, minExp, typeOfWork, jobsData]);
 
@@ -136,22 +137,28 @@ const HomePage = () => {
         setMinExp={setMinExp}
         roleName={roleName}
         setRoleName={setRoleName}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        setSearchedResults={setSearchedResults}
       />
       <div className={styles.jobsContainer}>
-        {(filteredData?.length > 0 ? filteredData : jobsData && jobsData)?.map(
-          (job) => {
-            return (
-              <JobCard
-                key={job?.jdUid}
-                job={job}
-                roleName={roleName}
-                typeOfWork={typeOfWork}
-                minExp={minExp}
-                minBasePay={minBasePay}
-              />
-            );
-          }
-        )}
+        {(filteredData?.length > 0
+          ? filteredData
+          : searchedResults?.length > 0
+          ? searchedResults
+          : jobsData && jobsData
+        )?.map((job) => {
+          return (
+            <JobCard
+              key={job?.jdUid}
+              job={job}
+              roleName={roleName}
+              typeOfWork={typeOfWork}
+              minExp={minExp}
+              minBasePay={minBasePay}
+            />
+          );
+        })}
         {loading && <p>Loading...</p>}
       </div>
     </div>

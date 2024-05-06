@@ -21,19 +21,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
-
 function getStyles(name, roleName, theme) {
   return {
     fontWeight:
@@ -61,10 +48,21 @@ const Filters = ({
   setTypeOfWork,
   minExp,
   setMinExp,
+  searchQuery,
+  setSearchQuery,
+  setSearchedResults,
 }) => {
   const theme = useTheme();
-  const [searchQuery, setSearchQuery] = useState("");
-  const handleSearch = () => {};
+
+  const handleSearch = (searchQuery) => {
+    const searchTerm = searchQuery.toLowerCase();
+    const results = jobsData?.filter((job) =>
+      job?.companyName?.toLowerCase()?.includes(searchTerm)
+    );
+    console.log(results);
+    setSearchedResults(results);
+    return results;
+  };
 
   const handleChangeRole = (event) => {
     const {
@@ -292,10 +290,14 @@ const Filters = ({
 
       <div className={styles.searchCompany}>
         <input
+          className={styles.searchCompanyDiv}
           type="text"
+          placeholder={"Search by company name"}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyPress={() => {}}
+          onKeyPress={() => {
+            handleSearch(searchQuery);
+          }}
         />
       </div>
 
