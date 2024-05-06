@@ -1,3 +1,12 @@
+Steps:
+1. Clone the repo
+git clone [repolink](https://github.com/bushrajabeenk/weekday-assignment.git)
+2. git install (if it does not work, then git install --force)
+3. git checkout main
+4. npm start (this will open the project locally on your PC on 3000 port number)
+5. If in case it automatically does not open, then
+localhost:3000 will start the server
+
 Functionalities implemented
 1. Job Cards: Each job listing should be displayed as a card containing the following information:
 Job title
