@@ -144,7 +144,7 @@ const HomePage = () => {
       <div className={styles.jobsContainer}>
         {(filteredData?.length > 0
           ? filteredData
-          : searchedResults?.length > 0
+          : searchQuery !== "" && searchedResults?.length > 0
           ? searchedResults
           : jobsData && jobsData
         )?.map((job) => {
