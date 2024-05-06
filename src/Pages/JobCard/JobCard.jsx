@@ -98,63 +98,84 @@ const JobCard = ({ job, roleName, typeOfWork, minExp, minBasePay }) => {
           <p>Posted 10 days ago</p>
         </div>
         <div style={{ display: "flex" }}>
-          <CardMedia
-            component="img"
-            alt="Job Image"
-            image={job?.logoUrl}
-            className={classes.customCardMedia}
-          />
+          {job?.logoUrl !== null && (
+            <CardMedia
+              component="img"
+              alt="Job Image"
+              image={job?.logoUrl}
+              className={classes.customCardMedia}
+            />
+          )}
           <div>
-            <Typography className={classes.compDiv} variant="body1">
-              {job?.companyName}
-            </Typography>
-            <Typography className={classes.titleDiv} variant="h5">
-              {job?.jobRole}
-            </Typography>
-            <Typography className={classes.locDiv} variant="body2">
-              {job?.location}
-            </Typography>
+            {job?.companyName !== null && (
+              <Typography className={classes.compDiv} variant="body1">
+                {job?.companyName}
+              </Typography>
+            )}
+            {job?.jobRole !== null && (
+              <Typography className={classes.titleDiv} variant="h5">
+                {job?.jobRole}
+              </Typography>
+            )}
+            {job?.location !== null && (
+              <Typography className={classes.locDiv} variant="body2">
+                {job?.location}
+              </Typography>
+            )}
           </div>
         </div>
-        <div className={styles.salaryDiv}>
-          <p>Estimated Salary:</p>
-          <p>
-            {job?.minJdSalary +
-              " - " +
-              job?.maxJdSalary +
-              " " +
-              job?.salaryCurrencyCode}
-          </p>
-          <p>
-            <img width={"14px"} height={"14px"} src={check} alt="" />
-          </p>
-        </div>
-        <div className={styles.abtCmpDiv}>About Company:</div>
-        <div className={styles.abtUsDiv}>About Us</div>
-        <Typography className={styles.descDiv} variant="body2">
-          <div className={styles.descInnerDivTinted}>
-            {job?.jobDetailsFromCompany}{" "}
+        {job?.minJdSalary !== null && job?.maxJdSalary !== null && (
+          <div className={styles.salaryDiv}>
+            <p>Estimated Salary:</p>
+            <p>
+              {job?.minJdSalary +
+                " - " +
+                job?.maxJdSalary +
+                " " +
+                job?.salaryCurrencyCode}
+            </p>
+            <p>
+              <img width={"14px"} height={"14px"} src={check} alt="" />
+            </p>
           </div>
-          <div
-            className={styles.viewJobDiv}
-            onClick={() => {
-              handleOpenModal();
-            }}
-          >
-            View job
-          </div>
-        </Typography>
-        <div className={styles.minExpTextDiv}>Minimum Experience</div>
-        <Typography className={styles.expDiv} variant="body2">
-          {job?.minExp == 1 ? job?.minExp + " year" : job?.minExp + " years"}
-        </Typography>
-        <a style={{ textDecoration: "none" }} href={job?.jdLink}>
-          <button className={styles.btnDiv}>
-            <img width={"20px"} height={"20px"} src={thunder} alt="" />
-            <p>Easy Apply</p>
-          </button>
-        </a>
-
+        )}
+        {job?.jobDetailsFromCompany !== null && (
+          <>
+            <div className={styles.abtCmpDiv}>About Company:</div>
+            <div className={styles.abtUsDiv}>About Us</div>
+            <Typography className={styles.descDiv} variant="body2">
+              <div className={styles.descInnerDivTinted}>
+                {job?.jobDetailsFromCompany}{" "}
+              </div>
+              <div
+                className={styles.viewJobDiv}
+                onClick={() => {
+                  handleOpenModal();
+                }}
+              >
+                View job
+              </div>
+            </Typography>
+          </>
+        )}
+        {job?.minExp !== null && (
+          <>
+            <div className={styles.minExpTextDiv}>Minimum Experience</div>
+            <Typography className={styles.expDiv} variant="body2">
+              {job?.minExp == 1
+                ? job?.minExp + " year"
+                : job?.minExp + " years"}
+            </Typography>
+          </>
+        )}
+        {job?.jdLink !== null && (
+          <a style={{ textDecoration: "none" }} href={job?.jdLink}>
+            <button className={styles.btnDiv}>
+              <img width={"20px"} height={"20px"} src={thunder} alt="" />
+              <p>Easy Apply</p>
+            </button>
+          </a>
+        )}
         <div className={styles.belowBtnDiv}>
           <div className={classes.blurredImage}>
             <img className={classes.image} src="" alt="Blurred" />
